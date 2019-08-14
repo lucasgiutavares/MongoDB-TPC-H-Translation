@@ -4,15 +4,15 @@ from pymongo import MongoClient
 
 # Init Mongo Client
 
-cliente = MongoClient('localhost', 27017)
+client = MongoClient('localhost', 27017)
 
 # New Database
 
-banco = cliente.bd_cefet
+db = client.db_tpch
 
 # Part Table
 
-part = banco.PART
+part = db.PART
 part_data = pd.read_csv('data/PART.tbl', sep='|', header=None)
 part_data = part_data.drop(9, axis=1)
 part_data.columns = ['_id', 'P_NAME', 'P_MFGR', 'P_BRAND', 'P_TYPE', 'P_SIZE', 'P_CONTAINER', 'P_RETAILPRICE', 'P_COMMENT']
@@ -23,7 +23,7 @@ print(part.count())
 
 # Supplier Table
 
-sup = banco.SUPPLIER
+sup = db.SUPPLIER
 sup_data = pd.read_csv('data/SUPPLIER.tbl', sep='|', header=None)
 sup_data = sup_data.drop(7, axis=1)
 sup_data.columns = ['_id', 'S_NAME', 'S_ADDRESS', 'S_NATIONKEY', 'S_PHONE', 'S_ACCTBAL', 'S_COMMENT']
@@ -34,7 +34,7 @@ print(sup.count())
 
 # Part Sup
 
-psup = banco.PARTSUPP
+psup = db.PARTSUPP
 psup_data = pd.read_csv('data/PARTSUPP.tbl', sep='|', header=None)
 psup_data = psup_data.drop(5, axis=1)
 psup_data.columns = ['PS_PARTKEY', 'PS_SUPPKEY', 'PS_AVAILQTY', 'PS_SUPPLYCOST', 'PS_COMMENT']
@@ -45,7 +45,7 @@ print(psup.count())
 
 # Customer Table
 
-customer = banco.CUSTOMER
+customer = db.CUSTOMER
 cust_data = pd.read_csv('data/CUSTOMER.tbl', sep='|', header=None)
 cust_data = cust_data.drop(8, axis=1)
 cust_data.columns = ['_id', 'C_NAME', 'C_ADDRESS', 'C_NATIONKEY', 'C_PHONE', 'C_ACCTBAL', 'MKT_SEGMENT', 'C_COMMENT']
@@ -56,7 +56,7 @@ print(customer.count())
 
 # Orders Table
 
-orders = banco.ORDERS
+orders = db.ORDERS
 orders_data = pd.read_csv('data/ORDERS.tbl', sep='|', header=None)
 orders_data = orders_data.drop(9, axis=1)
 orders_data.columns = ['_id', 'O_CUSTKEY', 'O_ORDERSTATUS', 'O_TOTALPRICE', 'O_ORDERDATE', 'O_ORDERPRIORITY', 'O_CLERK', 'O_SHIPPRIORITY', 'O_COMMENT']
@@ -67,7 +67,7 @@ print(orders.count())
 
 # Lineitem Table
 
-lineit = banco.LINEITEM
+lineit = db.LINEITEM
 lineit_data = pd.read_csv('data/LINEITEM.tbl', sep='|', header=None)
 lineit_data = lineit_data.drop(16, axis=1)
 lineit_data.columns = ['L_ORDERKEY', 'L_PARTKEY', 'L_SUPPKEY', 'L_LINENUMBER', 'L_QUANTITY', 'L_EXTENDEDPRICE', 'L_DISCOUNT', 'L_TAX',
@@ -79,7 +79,7 @@ print(lineit.count())
 
 # Nation Table
 
-nat = banco.NATION
+nat = db.NATION
 nat_data = pd.read_csv('data/NATION.tbl', sep='|', header=None)
 nat_data = nat_data.drop(4, axis=1)
 nat_data.columns = ['_id', 'N_NAME', 'N_REGIONKEY', 'N_COMMENT']
@@ -90,7 +90,7 @@ print(nat.count())
 
 # Region Table
 
-reg = banco.REGION
+reg = db.REGION
 reg_data = pd.read_csv('data/REGION.tbl', sep='|', header=None)
 reg_data = reg_data.drop(3, axis=1)
 reg_data.columns = ['_id', 'R_NAME', 'R_COMMENT']
